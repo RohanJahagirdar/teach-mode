@@ -1,0 +1,12 @@
+# Never commit local personal state.
+.teach-local/
+.personal/
+
+# Local agent state.
+.agents/local/
+
+# OS/editor files.
+.DS_Store
+.idea/
+.vscode/
+*.swp
