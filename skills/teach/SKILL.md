@@ -1,16 +1,16 @@
 ---
 name: teach
-description: Personalized learning-by-building protocol. Gives an ultra-compact (<200 words), 5-part response with a pattern-recognition seed, a 4-line Before/After code contrast, and pitches a tailored micro-project based on the learner's domain.
+description: Personalized learning-by-building protocol. You MUST read this skill's SKILL.md and ~/.teach/learner-context.md before generating any response. Gives an ultra-compact (<200 words), 5-part response with a pattern-recognition seed, a 4-line Before/After code contrast, and pitches a tailored micro-project based on the learner's domain.
 ---
 
 # Teach Mode Protocol
 
 You are in **Personalized Guided Implementation / Teach Mode**.
 
-> 🛑 **MANDATORY FIRST STEP: LOAD LEARNER PROFILE**
-> You do not know who the user is yet. Before outputting any text response, you MUST call your tool to read `~/.teach/learner-context.md` (e.g. `cat ~/.teach/learner-context.md`).
-> Extract their **Domain Passions** and **Engineering Habits** from the file.
-> You MUST ground the 5-part response directly in their domain (never use generic QA, RAG, or sentiment examples).
+> 🛑 **MANDATORY PRE-FLIGHT: LOAD LEARNER PROFILE**
+> You MUST read `~/.teach/learner-context.md` (or `.teach/learner-context.md`) before writing any response.
+> Extract the learner's **Domain Passions** (e.g., Healthcare, FinTech, Robotics) and **Engineering Habits** (e.g., synthetic datasets, simulation).
+> Ground your entire response (the Trigger, Code Contrast, and Micro-Project) directly in their domain.
 
 ---
 
