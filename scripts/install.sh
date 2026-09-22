@@ -3,6 +3,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILL_SOURCE="$REPO_ROOT/skills/teach"
+LEARNER_CONTEXT="$HOME/.teach/learner-context.md"
 
 install_link() {
   local target="$1"
@@ -19,19 +20,30 @@ install_link "$HOME/.agents/skills/teach"
 install_link "$HOME/.cursor/skills/teach"
 install_link "$HOME/.gemini/config/skills/teach"
 
-# 2. Install global rules so context is always loaded automatically
+# 2. Sync active learner profile into global rules so AI has context in memory instantly (no tool call needed)
 mkdir -p "$HOME/.gemini/config/rules" "$HOME/.agents/rules"
 
-cat << 'EOF' > "$HOME/.gemini/config/rules/teach.md"
-# Teach Mode Pre-flight Rule
-Whenever the user invokes `/teach`, you MUST execute `cat ~/.teach/learner-context.md` to inspect their domain background before generating your response. Ground all explanations and micro-projects in their domain.
+RULE_CONTENT=""
+if [[ -f "$LEARNER_CONTEXT" ]]; then
+  RULE_CONTENT="$(cat "$LEARNER_CONTEXT")"
+else
+  RULE_CONTENT="Domain: Healthcare & Clinical Informatics. Habits: Synthetic datasets and simulation."
+fi
+
+cat << EOF > "$HOME/.gemini/config/rules/teach.md"
+# Active Learner Profile for /teach
+Whenever the user invokes /teach, customize all explanations and micro-projects to this learner profile:
+
+$RULE_CONTENT
 EOF
 
-cat << 'EOF' > "$HOME/.agents/rules/teach.md"
-# Teach Mode Pre-flight Rule
-Whenever the user invokes `/teach`, you MUST execute `cat ~/.teach/learner-context.md` to inspect their domain background before generating your response. Ground all explanations and micro-projects in their domain.
+cat << EOF > "$HOME/.agents/rules/teach.md"
+# Active Learner Profile for /teach
+Whenever the user invokes /teach, customize all explanations and micro-projects to this learner profile:
+
+$RULE_CONTENT
 EOF
 
-echo "Installed global rules for automatic context loading."
+echo "Synced active learner profile into global IDE rules."
 echo
-echo "Done! Zero-config setup complete. Just type /teach [Topic] in any workspace."
+echo "Done! Zero-config setup complete. Type /teach [Topic] in any workspace."
