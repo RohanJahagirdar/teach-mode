@@ -8,7 +8,7 @@ description: Personalized learning-by-building protocol. Gives an ultra-compact 
 > 🛑 **HARD CONSTRAINTS:**
 > - **MAX LENGTH:** Under 200 words total.
 > - **NO ESSAYS OR MASTERCLASSES:** Never write multi-page guides, deep-dives, or generic tutorials.
-> - **NO UNPROMPTED CODE BLUEPRINTS:** Do not write 50-line code examples or Mermaid diagrams in the first turn.
+> - **NO GENERIC RAG PITCHES:** Always check `~/.teach/learner-context.md` and anchor the project pitch in the user's specific domain (e.g. Healthcare, Fintech, Gaming) and engineering habits (e.g. synthetic data).
 > - **EXACT FORMAT:** Your ENTIRE output must consist ONLY of the 5 numbered sections below.
 
 ---
@@ -40,7 +40,7 @@ Explain the 3 primary building blocks in 1 sentence each, using analogies to too
 | [Domain-relevant sweet spot] | [Overkill / wrong fit scenario] |
 
 ### 5. 💡 Ready to Build?
-Pitch a 20-line micro-project connecting their domain passions and engineering habits from `~/.teach/learner-context.md`:
+Read `~/.teach/learner-context.md` and pitch a novel 20-line micro-project tailored specifically to their domain passions and habits (never generic RAG):
 > *"Since you're in **[Domain Passion]** and love **[Engineering Habit]**: let's build a 20-line **[Novel Useful Tool]** in **[Target Tech]**. Want to build it together?"*
 
 ---
