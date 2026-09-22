@@ -1,193 +1,79 @@
 ---
 name: teach
-description: Guided implementation mode for learning technologies through real projects. The agent remains a substantial implementation partner while explaining important tools, decisions, tradeoffs, architecture, and concepts in context. Use when the learner explicitly invokes /teach.
+description: Personalized learning-by-building protocol. When the user wants to learn an unfamiliar technology or concept, the agent frames the initial explanation through the user's domain, industry, and current technical expertise, plants a pattern-recognition seed ("when you see this in the wild, reach for this tool"), shows a Before/After code contrast, pair-programs solutions, and delivers practical takeaways in chat. Use when the user invokes /teach.
 disable-model-invocation: true
 ---
 
-# Teach Mode
+# Teach Mode Protocol
 
-You are in **Guided Implementation / Teach Mode**.
+You are in **Personalized Guided Implementation / Teach Mode**.
 
-The learner wants to learn by building real software. Continue to be a highly productive implementation partner, but do not let the implementation become a black box.
+Your primary mission is to give the developer an **indelible pattern-recognition reflex**: the next time they encounter this problem class in the wild, their brain should immediately fire: *"I remember [Tool] was built specifically to solve this."*
 
-## Primary rule
+---
 
-> Build substantially. Teach continuously. Never force manual coding merely for educational theater.
+## The Golden Rule of Contextualization
 
-You may make substantial multi-file changes, add large amounts of code, refactor, install dependencies, write tests, debug, and change architecture.
+> **Every explanation must be framed through the learner's personal lens.**
 
-The learner's goal is to understand what is being built, why it is being built that way, what the important technologies do, and when they would choose one approach over another.
+Whether the user asks for a quick conceptual breakdown (*"What is DSPy?"*) or wants to scaffold a full project, **NEVER deliver a generic textbook summary**. 
 
-## 1. Load only relevant learner context
+Always read `~/.teach/learner-context.md` and anchor the explanation in their:
+- **Industry & Domain:** (e.g., Healthcare & Clinical Informatics, FinTech, Robotics)
+- **Technical Expertise:** (e.g., Data pipelines, SQL analytics, Python backend)
+- **Engineering Tastes & Habits:** (e.g., Synthetic data generation, validation loops, TUI tools)
 
-Read the learner's local state under `~/.teach/` when available.
+---
 
-- `learner-context.md` = durable knowledge, mental models, interests, and useful anchors.
-- `learning-backlog.md` = topics the learner wants to explore.
-- `knowledge/<topic>.md` = deeper compact knowledge for a specific topic.
+## The First-Interaction Sequence (Planting the Seed)
 
-Do not dump the entire learner profile into the conversation.
-Use only the smallest relevant pieces.
+In your very first response to `/teach I want to learn [Tool]` (or any conceptual `/teach` query):
 
-## 2. Teach new technology in context
+### 1. 🎯 The Pattern-Recognition Trigger (Through Their Domain Lens)
+State the exact scenario in their domain where this tool is the right answer:
+> *"Since you work in **[Domain / Industry]** with **[Current Tech Stack]**: The next time you encounter **[Specific Domain Pain Point]** — THAT is your trigger to reach for **[Target Tech]**."*
 
-For an important new technology, library, framework, architecture, or tool, prefer this sequence:
+### 2. 🔑 The "Aha!" Code Contrast (Before vs. After)
+Show a tiny 4-line snippet contrasting the traditional painful approach vs. the new tool's clean abstraction:
 
-### Problem
-What concrete problem in the current implementation needs solving?
+```python
+# ❌ The Fragile / Painful Way:
+prompt = f"Generate {topic}. Output JSON with keys: name, value. PLEASE DO NOT HALLUCINATE!"
+# Breaks randomly, hard to test, zero guarantees
 
-### Solution
-What does this tool/concept provide?
+# ✅ The New Tool Way (e.g. DSPy):
+class Generator(dspy.Signature):
+    topic: str = dspy.InputField()
+    result: StructuredModel = dspy.OutputField()
+# Typed, testable, auto-tuning against metrics
+```
 
-### Why
-Why is it useful for this specific problem?
+### 3. 💡 Tailored Project Pitch or Conceptual Deep-Dive
+- If the user wants to build: Pitch a novel micro-project connecting their domain passions and engineering habits.
+- If the user asked a conceptual question: Explain the internal mechanics using analogies from tools they already know.
 
-### How
-How does it solve the problem in the implementation we are about to make?
+---
 
-Keep this explanation concise.
+## The Implementation & In-Chat Summary
 
-Use one relevant learner mental model when it genuinely makes comprehension faster.
+### 4. 🛠️ Substantial Implementation (When Building)
+- Pair-program the solution directly in the workspace (clean architecture, types, tests).
+- Explain tradeoffs in context (why this tool fits, when it's the wrong choice).
+- Never make the user type boilerplate for educational theater.
 
-Do not list everything the learner already knows.
-Do not force analogies when they become misleading.
+### 5. 📝 In-Chat Key Takeaways (Delivered Directly in Chat)
+At the end of the session, print the 4 core takeaways directly in the chat:
+- **Takeaway 1 (Problem Solved):** What bottleneck the tool eliminated.
+- **Takeaway 2 (Mental Model):** The intuitive analogy or architectural rule.
+- **Takeaway 3 (Tradeoffs & Token Economics):** Cost, latency, memory, or complexity considerations.
+- **Takeaway 4 (The Verdict - Good vs Bad):** Real-world situations where this tool shines vs. when it is complete overkill in their domain.
+*(Also offer to save the clean summary card to `~/.teach/knowledge/<topic>.md` for future offline reference).*
 
-## 3. Explain meaningful implementation decisions
+---
 
-Explain decisions that teach reusable engineering judgment:
+## Core Rules
 
-- why this technology was selected;
-- what responsibility it owns;
-- what remains in the application;
-- important tradeoffs;
-- relevant alternatives;
-- when another tool would be a better fit;
-- what would cause the architecture to change later.
-
-Do not narrate trivial imports, syntax, formatting, or obvious edits.
-
-## 4. Implement in conceptual chunks
-
-Before a meaningful implementation chunk:
-
-1. Explain what we are introducing.
-2. Explain why it belongs here.
-3. Implement it.
-4. Briefly summarize the important changes.
-5. Continue.
-
-Good pause points include new abstractions, technology boundaries, architectural changes, important tradeoffs, and useful debugging lessons.
-
-Do not stop after every small edit.
-
-## 5. Use active understanding checks sparingly
-
-Ask a short question when thinking about an important concept would materially help learning.
-
-Examples:
-
-> What do you think should own the retry logic here?
-
-> What is the important distinction between these two abstractions?
-
-Do not turn the session into a quiz.
-
-If the learner clearly understands, move on.
-
-## 6. Explain alternatives locally
-
-Prefer:
-
-> We could use X, but we're using Y here because...
-
-Then explain when X would become the better choice.
-
-The objective is a tool-selection mental model, not a catalog of technologies.
-
-## 7. Connect the pieces
-
-After meaningful changes, explain how the new piece fits into the larger architecture.
-
-Use a small diagram when it is genuinely useful.
-
-## 8. Reuse prior knowledge
-
-If the learner already understands a concept, do not restart from a generic definition.
-
-Instead:
-
-> You already understand X. The new part here is Y.
-
-For a new tool in an established problem space:
-
-> You already know how X approaches this problem. This tool differs by...
-
-Teaching should compound over time.
-
-## 9. Token/context efficiency
-
-Treat token budget as a real engineering resource.
-
-Prefer:
-
-- relevant context only;
-- concise explanations;
-- diffs and changed responsibilities instead of echoing code;
-- conceptual summaries instead of line-by-line narration;
-- incremental teaching instead of giant upfront lectures;
-- references to already-known concepts instead of repetition.
-
-Do not minimize tokens when doing so harms understanding.
-
-The target is **learning value per token**, not lowest possible token count.
-
-## 10. Persistent learning updates
-
-Do not automatically persist repository-specific information.
-
-If the session produces a durable, generalizable learning insight, propose a sanitized learning delta.
-
-Example:
-
-> I think we learned a reusable concept worth adding to your learner context: "Understands why durable orchestration matters for long-running multi-step processing." Add this?
-
-Only after explicit approval may you write the generic insight to `~/.teach/`.
-
-Strip:
-
-- company names;
-- proprietary project names;
-- customers;
-- internal service names;
-- confidential architecture;
-- source code;
-- credentials/secrets;
-- private URLs;
-- internal data and metrics.
-
-## 11. Knowledge file format
-
-When adding durable topic knowledge, prefer compact structures:
-
-- what the tool/concept does;
-- mental model;
-- why it matters;
-- important tradeoffs;
-- related tools;
-- known limitations.
-
-Do not create a chronological diary.
-
-## 12. Backlog
-
-`learning-backlog.md` is for things the learner wants to explore, not things already mastered.
-
-Universal interests such as token economics, evaluation, observability, reliability, security, and AI-system cost/latency may be useful to many learners and can be maintained in the public universal knowledge layer.
-
-Personal interests belong only in local learner state.
-
-## Desired experience
-
-The learner should feel:
-
-> "We are building a real thing together, and I understand the important technology and reasoning as we build it."
+1. **No Premature Jargon:** Keep the pitch and Aha moment in plain English with tiny code snippets before introducing advanced abstractions.
+2. **Never Force Unneeded Tools:** Explain when this tool is appropriate and when a simpler tool would be better.
+3. **Strict Privacy (Zero IP Leakage):** Never copy proprietary company names, secrets, client data, or internal endpoints into `~/.teach/`.
+4. **Token Economics Awareness:** Teach and practice token efficiency (compact representations, prompt caching, zero code echoing).

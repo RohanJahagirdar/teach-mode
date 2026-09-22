@@ -1,139 +1,122 @@
 # teach-mode
 
-A portable, privacy-first **guided implementation** mode for AI coding agents.
+> **Learn any new technology by building real, exciting projects tailored to your passions—without generic tutorials or black-box AI code.**
 
-> Build substantially. Teach continuously. Never let the implementation become a black box.
+![teach-mode comparison](docs/assets/comparison.jpg)
 
-`/teach` is for people who want an AI coding agent to do real implementation work while actively teaching them the technologies, tools, architecture, tradeoffs, and reasoning involved.
+`teach-mode` is an open-source Agent Skill for **Antigravity, Cursor, and Zed**. 
 
-## What it is
+When you want to learn an unfamiliar tool (like DSPy, Redis, or WebSockets), standard AI tools usually dump a 5-page essay or write 400 lines of black-box code you can't debug.
 
-`teach-mode` is a generic teaching protocol. The public repository contains:
+`teach-mode` turns your AI assistant into a **senior pair programmer** who plants an instant mental trigger for *when to use the tool*, shows a tiny Before/After code contrast, and builds a tailored project with you step-by-step.
 
-- the teaching engine;
-- universal learning principles;
-- privacy rules;
-- portable templates.
+---
 
-Your personal learner profile and learning state are created locally under `~/.teach/` and are **not** part of this repository.
+## 💡 How It Works (The 4-Step Experience)
 
-## Core model
+You configure your interests once in your local profile (`~/.teach/learner-context.md`):
+- **Industry Passions:** *Healthcare, AI Systems*
+- **Engineering Habits:** *Loves synthetic datasets, generative simulations*
+- **Current Stack:** *Python, SQL, Data pipelines*
 
-```text
-                  PUBLIC REPOSITORY
-        ┌─────────────────────────────────┐
-        │ Teach Engine                    │
-        │ Universal Knowledge             │
-        │ Templates / Privacy Rules       │
-        └────────────────┬────────────────┘
-                         │
-                    local init
-                         │
-              ┌──────────┴──────────┐
-              │                     │
-        PERSONAL LAPTOP        WORK LAPTOP
-              │                     │
-        ~/.teach/              ~/.teach/
-        personal repo          work repo
-              │                     │
-              └────── NEVER ───────┘
-                      sync raw
-```
-
-## Teaching philosophy
-
-### Guided implementation
-
-The agent still performs substantial implementation: multi-file changes, large additions, refactors, tests, debugging, dependency changes, and architecture work.
-
-The learner is **not** forced to type all the code.
-
-Instead, the agent explains important decisions before and during implementation and checks understanding at useful conceptual boundaries.
-
-### Contextualized teaching
-
-Introduce unfamiliar technology through the shortest useful bridge:
+Then you open a fresh workspace and type:
 
 ```text
-familiar problem
-      ↓
-new tool / concept
-      ↓
-why it helps
-      ↓
-how it works here
+/teach I want to learn DSPy.
 ```
 
-Personalize for comprehension, not for personalization's sake.
-
-### Cumulative learning
-
-Do not repeatedly teach concepts the learner already understands. New tools should be explained relative to established mental models when that produces a clearer explanation.
-
-### Token economics
-
-Token/context efficiency is both a subject worth learning and a constraint on the teacher itself.
-
-Optimize for:
-
-> **useful learning gained per token and per minute of implementation**
-
-The skill should avoid repeated context, code echoing, unnecessary narration, and giant lectures. It should spend additional tokens when they materially improve understanding.
-
-## Local personal state
-
-`teach init` creates:
+### The In-Chat Flow
 
 ```text
-~/.teach/
-├── learner-context.md
-├── learning-backlog.md
-└── knowledge/
+1. 🎯 The Pattern-Recognition Trigger (The Seed):
+   "Whenever you find yourself writing complex LLM pipelines and battling fragile prompt 
+    strings, random JSON parsing failures, or prompts breaking when you switch to a cheaper/local model 
+    — THAT is your trigger to reach for DSPy."
+
+2. 💡 Plain-English Project Pitch & Code Contrast:
+   "Since you're in Healthcare and love synthetic data: let's build an Automated Synthetic 
+    Clinical Patient Generator & Anomaly Detector."
+   
+   # ❌ The Fragile Prompt Way:
+   prompt = f"Generate patient record for {disease}. Output JSON. PLEASE DO NOT HALLUCINATE!"
+   # Breaks on edge cases, impossible to unit test, random format failures
+   
+   # ✅ The DSPy Way:
+   class PatientGen(dspy.Signature):
+       disease: str = dspy.InputField()
+       record: ClinicalRecord = dspy.OutputField()
+   # Typed, testable Python code that auto-tunes itself against clinical metrics!
+
+3. 🛠️ Build Together:
+   [Scaffolds the repo, implements the DSPy pipeline, and runs tests together]
+
+4. 📝 In-Chat Key Takeaways (Delivered Right in the Chat):
+   • Takeaway 1 (Problem Solved): Replaced fragile string prompts with typed Signatures and Modules.
+   • Takeaway 2 (Mental Model): Metrics act as your loss function, automatically optimizing prompts for you.
+   • Takeaway 3 (Tradeoffs): Requires 10-20 examples upfront to compile effectively.
+   • Takeaway 4 (The Verdict - Good vs Bad):
+     - GREAT FOR: Multi-step LLM pipelines where accuracy matters and switching models (e.g. GPT-4 to local Llama for HIPAA) breaks normal prompts.
+     - BAD FOR: Simple 1-off text completions or static summaries where extra boilerplate isn't worth it.
+   (Summary card saved to ~/.teach/knowledge/dspy.md for future offline reference)
 ```
 
-These files contain only the learner's own durable, non-proprietary knowledge and interests.
+---
 
-## Privacy boundary
+## 🔒 2 Core Superpowers
 
-A current repository can be used as temporary context during a `/teach` session, including a proprietary work repository.
+### 1. Tailored to What You Care About
+Instead of boring generic "To-Do list" tutorials, every project is anchored in:
+- **Your Domain Passions:** (e.g. Healthcare, Fintech, Gaming, Robotics)
+- **Your Engineering Tastes:** (e.g. Synthetic data, CLI tools, simulation loops)
+- **Your Current Foundation:** Skips beginner basics for tools you already know and focuses 100% on the new technology.
 
-That temporary context must never be copied into persistent shared learning state.
+### 2. Strict Privacy (Zero IP Leakage)
+You can use `/teach` safely at work or on private client projects:
+- Your workspace code stays in your repository.
+- Only **sanitized, generic engineering cheat-sheets** (with zero company names, secrets, or internal URLs) are saved to your personal `~/.teach/` folder.
+- Your personal learning compounds across jobs and machines with total privacy.
 
-A work-related learning insight may be persisted only after it has been stripped down to a generic concept and explicitly approved by the learner.
+---
 
-## Getting started
+## ⚡ Quick Start (3 Steps)
 
 ```bash
-git clone https://github.com/RohanJahagirdar/teach-mode.git
-cd teach-mode
+# 1. Clone this repository
+git clone https://github.com/RohanJahagirdar/teach-mode.git && cd teach-mode
+
+# 2. Initialize your private local store (~/.teach/)
 ./scripts/init.sh
+
+# 3. Symlink the skill to your IDE (Cursor, Antigravity, Zed)
 ./scripts/install.sh
 ```
 
-Then, in a supported Agent Skills environment:
-
+Now open any workspace in your IDE and type:
 ```text
-/teach
+/teach I want to learn DSPy.
 ```
 
-## Supported global skill locations
+---
 
-The installer targets current global Agent Skill locations for:
+## 🧠 Personal Knowledge Store Layout (`~/.teach/`)
 
-- Cursor: `~/.agents/skills/teach` and `~/.cursor/skills/teach`
-- Zed: `~/.agents/skills/teach`
-- Antigravity IDE: `~/.gemini/config/skills/teach`
+All your personal learning context lives privately on your laptop:
 
-These are current documented locations as of September 2026.
+```text
+~/.teach/
+├── learner-context.md   # Your passions, engineering habits, and current tech stack
+├── learning-backlog.md  # Technologies and ideas you want to explore next
+└── knowledge/           # Compact, sanitized reference cheat-sheets from past sessions
+```
 
-## Personal state sync
+---
 
-The public repository intentionally does **not** sync `~/.teach/`.
+## 🛠️ Repository Layout
 
-This is deliberate: personal learning state should be synced through a separate mechanism so repository/session context never becomes part of the shared framework repository.
-
-The recommended next layer is encrypted learning-state sync with explicit review before publishing a learning delta.
-
-## Contributing
-
-See `CONTRIBUTING.md`.
+- `skills/teach/SKILL.md`: The pair-programming protocol and prompt for coding agents.
+- `scripts/`:
+  - `init.sh`: Sets up `~/.teach/`.
+  - `install.sh`: Symlinks `skills/teach` to Cursor, Antigravity, and Zed config dirs.
+  - `status.sh`: Verifies installation health.
+- `templates/`: Default templates for your personal profile.
+- `universal/`: Reference notes on cross-cutting engineering concepts (e.g. token economics).

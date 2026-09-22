@@ -1,40 +1,24 @@
 # Learner Context
 
-This file is private local state.
+This file is your private local profile (~/.teach/learner-context.md).
+The `/teach` skill reads this to personalize every learning project to your passions, technical foundation, and engineering habits—so you never get boring generic tutorials.
 
-Use it to describe durable, non-proprietary facts about the learner's:
+## 🎯 Domains & Industry Passions
+<!-- What fields or problem spaces genuinely excite you? (e.g., Healthcare & FHIR, Fintech, Robotics, Biotech, Climate Tech, Gaming) -->
+- Healthcare & Clinical Informatics (Synthetic datasets, FHIR, EHR analysis)
+- AI Engineering & LLM Systems
 
-- technical background;
-- technologies already understood;
-- mental models;
-- interests;
-- learning preferences;
-- useful personal projects or analogies.
+## 🛠️ Engineering Tastes & Habits
+<!-- What kinds of systems do you love building? How do you learn best? (e.g., synthetic data generation, high-throughput pipelines, AST analysis, TUI tools) -->
+- Loves synthetic datasets and generative simulations
+- Prefers learning by building working, novel tools rather than toy "Hello World" examples
+- Values clear architecture, typed contracts, and measurable evaluation metrics
 
-Do not put:
+## 🧱 Technical Foundation & Mental Models
+<!-- Languages, tools, and paradigms you already know well (so the AI can skip basic tutorials and use them as analogies) -->
+- Languages: Python, SQL
+- Data & Architecture: Data pipelines, relational schemas, distributed data processing
 
-- company names;
-- customer names;
-- proprietary project names;
-- internal architecture;
-- private APIs or service names;
-- source code;
-- secrets;
-- private URLs;
-- confidential numbers or datasets.
-
-## Engineering background
-
-<!-- Add durable, non-sensitive experience here. -->
-
-## Learning preferences
-
-<!-- How you want an agent to teach you. -->
-
-## Technical mental models
-
-<!-- Store durable understanding, not a chronological diary. -->
-
-## Personal technical anchors
-
-<!-- Personal projects or interests that are useful for analogies. -->
+## 🚀 Past Projects & Anchors
+<!-- Concrete systems you've built or worked on that make great mental anchors -->
+- Data ingestion pipelines and automated data quality validation

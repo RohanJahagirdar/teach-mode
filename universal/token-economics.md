@@ -1,47 +1,34 @@
-# Token Economics
+# Token Economics: The Practical Guide
 
-Token economics is a broadly useful engineering concept for AI systems.
+Token economics is the engineering discipline of designing AI systems that maximize intelligence and quality while minimizing token waste, latency, and costs.
 
-## Core idea
+---
 
-Tokens are not only a billing unit. They affect:
+## 1. The Golden Rules of Token Economics
 
-- cost;
-- latency;
-- context-window pressure;
-- throughput;
-- architecture;
-- caching strategy;
-- retrieval design;
-- model selection;
-- evaluation economics.
+### Rule 1: Output Tokens are 3–5x More Expensive & 10x Slower
+- **Why:** Generating output tokens requires autoregressive decoding (predicting one token at a time sequentially), which is compute-heavy and high-latency.
+- **Engineering Fix:** Design prompts and schemas that ask for concise, high-density answers rather than verbose conversational filler.
 
-## Teaching principle
+### Rule 2: Prompt Caching is Your Best Friend
+- **Why:** Modern LLM providers (Google, OpenAI, Anthropic) give up to 80–90% discounts and massive latency cuts if your prompt prefix matches previous requests.
+- **Engineering Fix:** Keep static content (system instructions, tool definitions, compiled few-shot examples) at the **top/prefix** of the prompt. Put dynamic variables at the very end.
 
-A good AI system deliberately decides what information deserves to enter model context, how often it needs to be sent, which model needs to see it, and whether repeated work can be cached or avoided.
+### Rule 3: High-Density Context > Raw Dumps
+- **Why:** Shoving a 10,000-line raw codebase or messy log dump into context degrades retrieval precision ("needle in a haystack" loss) and burns cash.
+- **Engineering Fix:** Use targeted AST extraction, structured knowledge cards, or concise summary deltas instead of raw file dumps.
 
-## High-value concepts
+---
 
-- input vs output token cost;
-- context growth;
-- prompt and context compaction;
-- caching;
-- batching;
-- retrieval precision;
-- model routing;
-- structured output overhead;
-- tool-call overhead;
-- evaluation cost;
-- latency/cost/quality tradeoffs.
+## 2. In DSPy: Compilation vs. Runtime Waste
 
-## Skill behavior
+- **Without Compilation:** A brittle prompt fails 20% of the time, triggering multi-turn retry loops, verbose error explanations, and wasted tokens in production.
+- **With DSPy Compilation (`BootstrapFewShot`):** You spend tokens **once** during offline optimization to discover the leanest, most effective prompt. At runtime, every request executes cleanly on turn 1.
 
-The teacher should practice token economics itself:
+---
 
-- load only relevant learner state;
-- do not repeat known material;
-- avoid echoing large code blocks;
-- explain conceptual deltas rather than every edit;
-- spend extra tokens when they prevent misunderstanding.
+## 3. How `teach-mode` Practices Token Economics
 
-The goal is not minimum output. The goal is **maximum useful learning per token**.
+1. **Selective Ingestion:** Only reads relevant topics from `~/.teach/` rather than dumping your entire history.
+2. **Conceptual Diffs:** Teaches through targeted architectural diffs rather than echoing hundreds of lines of unchanged code.
+3. **L2 Context Caching:** Saves compact 200–400 word cheat-sheets to `~/.teach/knowledge/` so future AI sessions have instant, low-token context.
