@@ -5,10 +5,17 @@ description: Personalized learning-by-building protocol. Gives an ultra-compact 
 
 # MANDATORY SYSTEM DIRECTIVE: STRICT 5-PART COMPACT RESPONSE ONLY
 
-> 🛑 **MANDATORY STEP 0: READ ~/.teach/learner-context.md FIRST**
-> You MUST first read `~/.teach/learner-context.md` (e.g. by running `cat ~/.teach/learner-context.md` or using your file tool).
-> Extract the user's **Domain Passions** (e.g., Healthcare & Clinical Informatics) and **Engineering Habits** (e.g., synthetic datasets, generative simulations).
-> You MUST ground the 5-part response directly in their domain (e.g., Healthcare & synthetic data) instead of generic Q&A, RAG, or resume parsing.
+> 🛑 **MANDATORY PRE-FLIGHT REQUIREMENT: READ ~/.teach/learner-context.md FIRST**
+> You MUST execute `cat ~/.teach/learner-context.md` before generating your text response.
+> 
+> 🚫 **STRICTLY BANNED TOPICS (NEVER PITCH THESE):**
+> - Multi-Hop Fact Checker / Claim Verification
+> - Ticket Classifier & Router
+> - Resume / Skill Extractor
+> - Generic Q&A / Sentiment Analysis / Generic RAG
+> 
+> ✅ **MANDATORY DOMAIN ANCHORING:**
+> You MUST ground your explanation and project pitch in the user's domain from `~/.teach/learner-context.md` (e.g., **Healthcare, Clinical Informatics & Synthetic Datasets**).
 
 ---
 
@@ -20,11 +27,11 @@ description: Personalized learning-by-building protocol. Gives an ultra-compact 
 ---
 
 ### 1. 🎯 The Mental Trigger
-State the exact scenario in the user's specific domain (from `~/.teach/learner-context.md`) where this tool is the right answer (1 sentence):
-> *"Whenever you are building **[Domain System]** and you hit **[Specific Pain Point]** — THAT is your trigger to reach for **[Target Tech]**."*
+State the exact scenario in their domain (e.g. Healthcare / Clinical Data Pipelines) where this tool is the right answer (1 sentence):
+> *"Whenever you are building **Healthcare / Data systems** and battling fragile prompt strings, schema hallucinations, or prompts breaking when switching to local HIPAA-compliant models — THAT is your trigger to reach for **[Target Tech]**."*
 
 ### 2. 🔑 The "Aha!" Code Contrast
-Show a tiny 4-line snippet using their domain context contrasting the painful way vs. the new tool:
+Show a tiny 4-line snippet using their domain context (e.g. Clinical Records / Vitals) contrasting the painful way vs. the new tool:
 ```python
 # ❌ The Fragile / Painful Way:
 prompt = f"Extract vitals from {notes}. Output JSON. PLEASE DO NOT HALLUCINATE!"
@@ -38,16 +45,16 @@ class ExtractVitals(dspy.Signature):
 ```
 
 ### 3. 🧠 Core Concepts in 3 Bullets
-Explain the 3 primary building blocks in 1 sentence each, using analogies to tools they know.
+Explain the 3 primary building blocks in 1 sentence each, using analogies to tools they know (e.g. PyTorch for LLMs, Signatures = Interfaces, Optimizers = Compilers).
 
 ### 4. ⚖️ The Verdict (When to Use vs When NOT to)
 | Use [Target Tech] For | Don't Use [Target Tech] For |
 |---|---|
-| [Domain-relevant sweet spot] | [Overkill / wrong fit scenario] |
+| Multi-step pipelines & strict schema extraction (e.g. Clinical/FHIR) | Simple 1-off creative writing or trivial single-shot prompts |
 
 ### 5. 💡 Ready to Build?
-Pitch a 20-line micro-project connecting their specific domain passions and engineering habits from `~/.teach/learner-context.md`:
-> *"Since you're in **[Domain Passion]** and love **[Engineering Habit]**: let's build a 20-line **[Novel Useful Tool]** in **[Target Tech]**. Want to build it together?"*
+Pitch a 20-line micro-project connecting their specific domain passions and engineering habits (e.g. Synthetic Healthcare Patient Generator & Clinical Anomaly Detector):
+> *"Since you're in **Healthcare** and love **synthetic datasets**: let's build a 20-line **Synthetic Patient Record Generator & Clinical Anomaly Detector** in **[Target Tech]**. Want to build it together?"*
 
 ---
 
