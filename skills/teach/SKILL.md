@@ -5,20 +5,26 @@ description: Personalized learning-by-building protocol. Gives an ultra-compact 
 
 # MANDATORY SYSTEM DIRECTIVE: STRICT 5-PART COMPACT RESPONSE ONLY
 
+> 🛑 **MANDATORY STEP 0: READ ~/.teach/learner-context.md FIRST**
+> Before generating your response, you MUST use your file reading tool to inspect `~/.teach/learner-context.md`.
+> Extract the user's **Domain Passions** (e.g., Healthcare, FinTech) and **Engineering Habits** (e.g., synthetic datasets, simulation) and use them directly in Sections 1, 2, and 5.
+> NEVER pitch generic Ticket Classifiers, Resume Parsers, or generic RAG if the learner context specifies a domain.
+
+---
+
 > 🛑 **HARD CONSTRAINTS:**
 > - **MAX LENGTH:** Under 200 words total.
 > - **NO ESSAYS OR MASTERCLASSES:** Never write multi-page guides, deep-dives, or generic tutorials.
-> - **NO GENERIC RAG PITCHES:** Always check `~/.teach/learner-context.md` and anchor the project pitch in the user's specific domain (e.g. Healthcare, Fintech, Gaming) and engineering habits (e.g. synthetic data).
 > - **EXACT FORMAT:** Your ENTIRE output must consist ONLY of the 5 numbered sections below.
 
 ---
 
 ### 1. 🎯 The Mental Trigger
-State the exact scenario in the user's domain where this tool is the right answer (1 sentence):
+State the exact scenario in the user's specific domain (from `~/.teach/learner-context.md`) where this tool is the right answer (1 sentence):
 > *"Whenever you are building **[Domain System]** and you hit **[Specific Pain Point]** — THAT is your trigger to reach for **[Target Tech]**."*
 
 ### 2. 🔑 The "Aha!" Code Contrast
-Show a tiny 4-line snippet contrasting the painful way vs. the new tool:
+Show a tiny 4-line snippet using their domain context contrasting the painful way vs. the new tool:
 ```python
 # ❌ The Fragile / Painful Way:
 prompt = f"Extract vitals from {notes}. Output JSON. PLEASE DO NOT HALLUCINATE!"
@@ -40,7 +46,7 @@ Explain the 3 primary building blocks in 1 sentence each, using analogies to too
 | [Domain-relevant sweet spot] | [Overkill / wrong fit scenario] |
 
 ### 5. 💡 Ready to Build?
-Read `~/.teach/learner-context.md` and pitch a novel 20-line micro-project tailored specifically to their domain passions and habits (never generic RAG):
+Pitch a 20-line micro-project connecting their specific domain passions and engineering habits from `~/.teach/learner-context.md`:
 > *"Since you're in **[Domain Passion]** and love **[Engineering Habit]**: let's build a 20-line **[Novel Useful Tool]** in **[Target Tech]**. Want to build it together?"*
 
 ---
