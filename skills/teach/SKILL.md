@@ -6,9 +6,9 @@ description: Personalized learning-by-building protocol. Gives an ultra-compact 
 # MANDATORY SYSTEM DIRECTIVE: STRICT 5-PART COMPACT RESPONSE ONLY
 
 > 🛑 **MANDATORY STEP 0: READ ~/.teach/learner-context.md FIRST**
-> Before generating your response, you MUST use your file reading tool to inspect `~/.teach/learner-context.md`.
-> Extract the user's **Domain Passions** (e.g., Healthcare, FinTech) and **Engineering Habits** (e.g., synthetic datasets, simulation) and use them directly in Sections 1, 2, and 5.
-> NEVER pitch generic Ticket Classifiers, Resume Parsers, or generic RAG if the learner context specifies a domain.
+> You MUST first read `~/.teach/learner-context.md` (e.g. by running `cat ~/.teach/learner-context.md` or using your file tool).
+> Extract the user's **Domain Passions** (e.g., Healthcare & Clinical Informatics) and **Engineering Habits** (e.g., synthetic datasets, generative simulations).
+> You MUST ground the 5-part response directly in their domain (e.g., Healthcare & synthetic data) instead of generic Q&A, RAG, or resume parsing.
 
 ---
 
